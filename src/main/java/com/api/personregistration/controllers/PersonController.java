@@ -26,6 +26,14 @@ public class PersonController {
 
   @PostMapping
   public ResponseEntity<Object> savePerson(@RequestBody @Valid PersonDto personDto) {
+    if (personService.existsByCpf(personDto.getCpf())) {
+      return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Person with CPF already exists.");
+    }
+
+    if (personService.existsByEmail(personDto.getEmail())) {
+      return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Person with Email already exists.");
+    }
+
     var personModel = new PersonModel();
     BeanUtils.copyProperties(personDto, personModel);
     personModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));

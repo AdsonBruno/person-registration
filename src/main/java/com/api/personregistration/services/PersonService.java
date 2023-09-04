@@ -17,6 +17,14 @@ public class PersonService {
   public PersonModel save(PersonModel personModel) {
     return personRepository.save(personModel);
   }
+
+  public boolean existsByCpf(String cpf) {
+    return  personRepository.existsByCpf(cpf);
+  }
+
+  public boolean existsByEmail(String email) {
+    return personRepository.existsByEmail(email);
+  }
 }
 
 
