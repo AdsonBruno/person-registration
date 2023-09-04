@@ -2,12 +2,15 @@ package com.api.personregistration.models;
 
 import jakarta.persistence.*;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 @Table(name = "TB_PERSON")
-public class PersonModel {
+public class PersonModel implements Serializable{
+
   private static final long serialVersionUID = 1L;
 
   @Id
@@ -17,12 +20,10 @@ public class PersonModel {
   private String firstName;
   @Column(nullable = false, length = 100)
   private String lastName;
-  @Column(nullable = false, length = 11)
+  @Column(nullable = false, unique = true, length = 11)
   private String cpf;
   @Column(nullable = false, length = 100)
   private String email;
-  @Column(nullable = false, length = 10)
-  private String dateOfBirth;
   @Column(nullable = false)
   private int age;
   @Column(nullable = false)
@@ -68,14 +69,6 @@ public class PersonModel {
     this.email = email;
   }
 
-  public String getDateOfBirth() {
-    return dateOfBirth;
-  }
-
-  public void setDateOfBirth(String dateOfBirth) {
-    this.dateOfBirth = dateOfBirth;
-  }
-
   public int getAge() {
     return age;
   }
@@ -91,4 +84,5 @@ public class PersonModel {
   public void setRegistrationDate(LocalDateTime registrationDate) {
     this.registrationDate = registrationDate;
   }
+
 }

@@ -5,23 +5,63 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.br.CPF;
 
+
 public class PersonDto {
 
   @NotBlank
-  @Size(max = 100)
   private String firstName;
   @NotBlank
-  @Size(max = 100)
   private String lastName;
   @NotBlank
-  @Size(max = 11)
   @CPF
   private String cpf;
   @NotBlank
   @Email
   private String email;
-  @NotBlank
-  @Size(max = 10)
-  private String dateOfBirth;
+  private int age;
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public String getCpf() {
+    return cpf;
+  }
+
+
+  public void setCpf(String cpf) {
+    this.cpf = cpf;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public int getAge() {
+    return age;
+  }
+
+  public void setAge(int age) {
+    this.age = age;
+  }
+
+
+
 
 }
