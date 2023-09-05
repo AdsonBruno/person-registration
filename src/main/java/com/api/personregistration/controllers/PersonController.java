@@ -54,4 +54,14 @@ public class PersonController {
     Optional<PersonModel> personModelOptional = personService.findById(id);
     return personModelOptional.<ResponseEntity<Object>>map(personModel -> ResponseEntity.status(HttpStatus.OK).body(personModel)).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Person not found"));
   }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Object> deletePerson(@PathVariable(value = "id") UUID id) {
+    Optional<PersonModel> personModelOptional = personService.findById(id);
+    if (!personModelOptional.isPresent()) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Person not found");
+    }
+    personService.delete(personModelOptional.get());
+    return ResponseEntity.status(HttpStatus.OK).body("Person deleted sucessfully");
+  }
 }

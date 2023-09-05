@@ -37,6 +37,11 @@ public class PersonService {
   public Optional<PersonModel> findById(UUID id) {
     return personRepository.findById(id);
   }
+
+  @Transactional
+  public void delete(PersonModel personModel) {
+    personRepository.delete(personModel);
+  }
 }
 
 
