@@ -12,10 +12,4 @@ public class PersonRegistrationApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PersonRegistrationApplication.class, args);
 	}
-
-
-	public String index() {
-		return "Olá, mundo!";
-	}
-
 }

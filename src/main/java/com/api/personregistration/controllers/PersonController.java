@@ -5,6 +5,10 @@ import com.api.personregistration.models.PersonModel;
 import com.api.personregistration.services.PersonService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +21,7 @@ import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping(value = "/persons")
+@RequestMapping(value = "/api/persons")
 public class PersonController {
 
   final PersonService personService;
@@ -44,10 +48,9 @@ public class PersonController {
   }
 
   @GetMapping
-  public ResponseEntity<List<PersonModel>> getAllPerson() {
-    return ResponseEntity.status(HttpStatus.OK).body(personService.findAll());
+  public ResponseEntity<Page<PersonModel>> getAllPerson(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
+    return ResponseEntity.status(HttpStatus.OK).body(personService.findAll(pageable));
   }
-
 
   @GetMapping("/{id}")
   public ResponseEntity<Object> getOnePerson(@PathVariable(value = "id") UUID id) {

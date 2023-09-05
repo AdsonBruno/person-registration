@@ -3,6 +3,8 @@ package com.api.personregistration.services;
 import com.api.personregistration.models.PersonModel;
 import com.api.personregistration.repositories.PersonRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,8 +32,8 @@ public class PersonService {
     return personRepository.existsByEmail(email);
   }
 
-  public List<PersonModel> findAll() {
-    return personRepository.findAll();
+  public Page<PersonModel> findAll(Pageable pageable) {
+    return personRepository.findAll(pageable);
   }
 
   public Optional<PersonModel> findById(UUID id) {
