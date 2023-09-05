@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -38,6 +39,11 @@ public class PersonController {
     BeanUtils.copyProperties(personDto, personModel);
     personModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
     return ResponseEntity.status(HttpStatus.CREATED).body(personService.save(personModel));
+  }
+
+  @GetMapping
+  public ResponseEntity<List<PersonModel>> getAllPerson() {
+    return ResponseEntity.status(HttpStatus.OK).body(personService.findAll());
   }
 
 }

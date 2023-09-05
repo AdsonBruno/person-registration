@@ -5,6 +5,8 @@ import com.api.personregistration.repositories.PersonRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PersonService {
   final PersonRepository personRepository;
@@ -24,6 +26,10 @@ public class PersonService {
 
   public boolean existsByEmail(String email) {
     return personRepository.existsByEmail(email);
+  }
+
+  public List<PersonModel> findAll() {
+    return personRepository.findAll();
   }
 }
 
