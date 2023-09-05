@@ -9,8 +9,7 @@ a utilização do [Spring Boot](https://docs.spring.io/spring-boot/docs/current/
 
 - Java 17
 - Spring Boot 3.1.3
-- PostgreSQL
-- JUnit 
+- PostgreSQL 
 - Maven
 
 ## Dependências Utilizadas
