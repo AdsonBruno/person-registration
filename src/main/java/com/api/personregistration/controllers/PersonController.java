@@ -64,4 +64,19 @@ public class PersonController {
     personService.delete(personModelOptional.get());
     return ResponseEntity.status(HttpStatus.OK).body("Person deleted sucessfully");
   }
+
+  @PutMapping("/{id}")
+  public ResponseEntity<Object> updatePerson(@PathVariable(value = "id")  UUID id, @RequestBody @Valid PersonDto personDto) {
+    Optional<PersonModel> personModelOptional = personService.findById(id);
+    if (!personModelOptional.isPresent()) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Person not found");
+    }
+    var personModel = personModelOptional.get();
+    personModel.setFirstName(personDto.getFirstName());
+    personModel.setLastName(personDto.getLastName());
+    personModel.setCpf(personDto.getCpf());
+    personModel.setEmail(personDto.getEmail());
+    personModel.setAge(personDto.getAge());
+    return ResponseEntity.status(HttpStatus.OK).body(personService.save(personModel));
+  }
 }
