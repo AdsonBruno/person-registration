@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping(value = "/person-registration")
+@RequestMapping(value = "/persons")
 public class PersonController {
 
   final PersonService personService;
@@ -46,4 +48,10 @@ public class PersonController {
     return ResponseEntity.status(HttpStatus.OK).body(personService.findAll());
   }
 
+
+  @GetMapping("/{id}")
+  public ResponseEntity<Object> getOnePerson(@PathVariable(value = "id") UUID id) {
+    Optional<PersonModel> personModelOptional = personService.findById(id);
+    return personModelOptional.<ResponseEntity<Object>>map(personModel -> ResponseEntity.status(HttpStatus.OK).body(personModel)).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Person not found"));
+  }
 }

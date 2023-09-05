@@ -6,6 +6,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class PersonService {
@@ -30,6 +32,10 @@ public class PersonService {
 
   public List<PersonModel> findAll() {
     return personRepository.findAll();
+  }
+
+  public Optional<PersonModel> findById(UUID id) {
+    return personRepository.findById(id);
   }
 }
 
